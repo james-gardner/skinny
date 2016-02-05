@@ -1,0 +1,26 @@
+{
+  "name": "skinny",
+  "version": "1.0.0",
+  "description": "Lightweight Express Example",
+  "main": "bin/www",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/james-gardner/skinny.git"
+  },
+  "author": "james gardner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/james-gardner/skinny/issues"
+  },
+  "homepage": "https://github.com/james-gardner/skinny#readme",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "express": "^4.13.4",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "swig": "^1.4.2"
+  }
+}
