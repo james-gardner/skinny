@@ -1,0 +1,21 @@
+extends ./layout.jade
+
+block title
+  title James Gardner - Resume
+
+block content
+  section
+    each w in work
+      article
+        header
+          h3 #{w.position} - #{w.company}
+          h5 #{w.started_at} -  #{w.ended_at} 
+        
+        p #{w.summary} 
+        p #{w.description}
+        
+        if w.highlights
+          h4 Highlights and Experience
+          ul
+            each h in w.highlights
+              li #{h}

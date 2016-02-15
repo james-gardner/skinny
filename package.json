@@ -17,10 +17,17 @@
   },
   "homepage": "https://github.com/james-gardner/skinny#readme",
   "dependencies": {
+    "bcrypt": "^0.8.5",
+    "bluebird": "^3.2.2",
     "body-parser": "^1.14.2",
+    "cookie-parser": "^1.4.1",
     "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "jade": "^1.11.0",
+    "moment": "^2.11.2",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
-    "swig": "^1.4.2"
+    "pg": "^4.4.4",
+    "pg-promise": "^3.1.6",
   }
 }
