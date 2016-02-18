@@ -1,4 +1,5 @@
 var passport = require('passport')
+  , user = require('../services/user')
   , router = require('express').Router();
 
 router.get('/login', 
@@ -12,5 +13,20 @@ router.post('/login',
     res.redirect('/');
   });
 
+// TODO: Content negotiation.
+router.post('/register', 
+  function (req, res) {
+    user.create(req.body, function (err) {
+      if(err) {
+        res.render('login', { registration : {
+          errors : err
+        }});
+      } else {
+
+      }
+    })
+
+    
+  });
 
 module.exports = router;

@@ -2,7 +2,7 @@
 var express = require('express')
   , passport = require('passport')
   , db = require('./db')
-  , bcrypt = require('bcrypt');
+  , user = require('./services/user');
 
 
 // Create express instance.
@@ -12,27 +12,7 @@ app = express();
 // Configure passport local strategy.
 var LocalStrategy = require('passport-local').Strategy;
 
-passport.use(new LocalStrategy(
-  function(username, password, cb) {
-    db.one({
-      name : 'find-user',
-      text : 'select * from users where username = $1',
-      values:  [username]
-    })
-      .then(function (user) {
-        bcrypt.compare(password, user.password, function(err, res) {
-          if(err) return cb(err);
-
-          if(res === false || user.status === 'disabled') {
-            return cb(null, false);
-          }
-
-          return cb(null, user);
-        });
-      })
-      .catch(cb);
-  }
-));
+passport.use(new LocalStrategy(user.authenticate));
 
 passport.serializeUser(function(user, cb) {
   return cb(null, { id : user.id, resume : user.resume_id, status : user.status });

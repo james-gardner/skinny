@@ -1,8 +1,42 @@
+h2 Login
+
 form(action='login', method='post')
   fieldset
     legend Sign In
     label(for='username') Email/Username
     input#username(name='username', placeholder='user@example.com')
+    
     label(for='password') Access Code
     input#password(name='password', type='password', placeholder='ABFE102078')
+    
     input(type='submit', value='submit')
+
+h2 Request Access Code
+
+form(action='register', method='post')
+  if registration 
+    p There were problems with your request:
+    
+    if registration.errors
+      each err in registration.errors
+        p= err.error
+
+  fieldset
+    legend Register
+
+    label(for='type') What do you do?
+    select#type(name='type')
+      option(value='') Please select
+      option(value='agency') I work for an agency
+      option(value='direct') I'm recruiting for my company
+      option(value='misc') Other
+
+    label(for='reason') Reason for access
+    textarea#reason(name='reason')
+
+    label(for='email') Email Address
+    input#email(name='email', placeholder='user@example.com')
+
+    input(type='submit', value='submit')
+
+script(src='scripts/user.js')
