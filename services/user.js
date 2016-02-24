@@ -1,5 +1,6 @@
 var db = require('../db')
   , validator = require('validator')
+  , strip = require('striptags')
   , bcrypt = require('bcrypt');
 
 var getByUsername = function (username) {
@@ -24,11 +25,32 @@ module.exports = {
 
     // This should represent a 400.
     if(errors.length) {
-      return cb(errors);
+      return cb({ code: 400, messages : errors });
     } else {  
-      // User already exists represent a 409.
-      
-      // Any DB issues represent 500.
+      db.one({
+        name : 'user-exists',
+        text : 'select exists(select 1 from users where username = $1) AS "exists"',
+        values : [user.email.toLowerCase()]
+      })
+      .then(function (result) {
+        if(result.exists === false) {
+          db.one({
+            name : 'create-user',
+            text : 'insert into users (username, reason, type) values ($1, $2, $3)' ,
+            values : [
+              user.email.toLowerCase(),
+              strip(user.reason),
+              user.type
+            ]
+          })
+          .then(function (id) {
+            console.log(id);
+            return cb(null, id);
+          })
+        } else {
+          return cb({ code: 409, messages : ['User already exists'] });
+        }
+      })
     }
   },
 

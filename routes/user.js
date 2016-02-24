@@ -18,6 +18,8 @@ router.post('/register',
   function (req, res) {
     user.create(req.body, function (err) {
       if(err) {
+        console.log(err);
+        
         res.render('login', { registration : {
           errors : err
         }});
